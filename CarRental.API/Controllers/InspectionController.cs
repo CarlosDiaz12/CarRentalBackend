@@ -1,4 +1,5 @@
-﻿using CarRental.API.Concrete;
+﻿using AutoMapper;
+using CarRental.API.Concrete;
 using CarRental.API.DTOs;
 using CarRental.Domain.DTOs;
 using CarRental.Domain.Entities;
@@ -10,10 +11,10 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InspectionController : BaseController<Inspection>
+    public class InspectionController : BaseController<Inspection, Inspection>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public InspectionController(IUnitOfWork unitOfWork) : base(unitOfWork) => _unitOfWork = unitOfWork;
+        public InspectionController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) => _unitOfWork = unitOfWork;
 
         [HttpGet("inspected")]
         public async Task<IActionResult> CheckVehicleIsInspected([FromQuery] CheckVehicleAvaiabilityDto data)

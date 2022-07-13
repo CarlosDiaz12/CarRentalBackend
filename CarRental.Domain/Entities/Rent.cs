@@ -18,7 +18,5 @@ namespace CarRental.Domain.Entities
         public decimal RatePerDay { get; set; }
         public int DaysQuantity { get; set; }
         public string Comment { get; set; }
-
-        //public ICollection<Inspection> Inspections { get; set; }
     }
 }

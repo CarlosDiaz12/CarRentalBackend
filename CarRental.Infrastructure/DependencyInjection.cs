@@ -12,6 +12,9 @@ namespace CarRental.Infrastructure
         {
             services.AddDbContext<CarRentalContext>();
 
+            // automapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             // non-generic
             services.AddScoped<IInspectionRepository, InspectionRepository>();
             services.AddScoped<IRentRepository, RentRepository>();

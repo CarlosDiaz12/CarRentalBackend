@@ -1,4 +1,5 @@
-﻿using CarRental.API.Abstract;
+﻿using AutoMapper;
+using CarRental.API.Abstract;
 using CarRental.API.DTOs;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
@@ -12,22 +13,27 @@ namespace CarRental.API.Concrete
 {
     [Produces("application/json")]
     [ApiController]
-    public abstract class BaseController<T> : ControllerBase, IBaseController<T> where T: BaseEntity
+    public abstract class BaseController<T, TCreateDto> : ControllerBase, IBaseController<T, TCreateDto> where T: BaseEntity
     {
         private readonly IRepository<T> _repository;
         private readonly IUnitOfWork _unitOfWork;
-        public BaseController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public BaseController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _repository = _unitOfWork.GetRepository<T>();
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] T _object)
+        public async Task<IActionResult> Create([FromBody] TCreateDto _object)
         {
-            await _repository.Insert(_object);
-            var result = await _unitOfWork.SaveChangesAsync() > 0;
-            var response = new ResponseDto<bool>(result, result);
+            var newObject = _mapper.Map<T>(_object);
+
+            await _repository.Insert(newObject);
+            await _unitOfWork.SaveChangesAsync();
+
+            var response = new ResponseDto<bool>(true);
             return Ok(response);
         }
 
@@ -35,8 +41,8 @@ namespace CarRental.API.Concrete
         public async Task<IActionResult> Delete(int Id)
         {
             await _repository.Delete(Id);
-            var result = await _unitOfWork.SaveChangesAsync() > 0;
-            var response = new ResponseDto<bool>(result, result);
+            await _unitOfWork.SaveChangesAsync();
+            var response = new ResponseDto<bool>(true);
             return Ok(response);
         }
 
@@ -67,8 +73,8 @@ namespace CarRental.API.Concrete
         public async Task<IActionResult> Update([FromBody] T _object)
         {
             _repository.Update(_object);
-            var result = await _unitOfWork.SaveChangesAsync() > 0;
-            var response = new ResponseDto<bool>(result, result);
+            await _unitOfWork.SaveChangesAsync();
+            var response = new ResponseDto<bool>(true);
             return Ok(response);
         }
     }

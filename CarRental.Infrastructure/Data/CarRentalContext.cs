@@ -92,14 +92,6 @@ namespace CarRental.Infrastructure.Data
                        .WithMany()
                        .OnDelete(DeleteBehavior.NoAction);
             });
-            /*
-            modelBuilder.Entity<Rent>(entity =>
-            {
-                entity.HasMany(x => x.Inspections)
-                       .WithOne()
-                       .OnDelete(DeleteBehavior.NoAction);
-            });
-            */
         }
     }
 }
