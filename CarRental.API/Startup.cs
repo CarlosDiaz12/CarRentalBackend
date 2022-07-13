@@ -51,7 +51,6 @@ namespace CarRental.API
             // Configurar middleware global
             services.AddMvcCore(opts =>
             {
-                // opts.Filters.Add(typeof(ValidationFilter));
                 opts.Filters.Add(typeof(GlobalExceptionFilter));
 
             });
@@ -65,7 +64,7 @@ namespace CarRental.API
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

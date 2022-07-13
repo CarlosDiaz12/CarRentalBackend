@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CarRental.API.Concrete;
 using CarRental.API.DTOs;
-using CarRental.Domain.DTOs;
+using CarRental.Domain.DTOs.Rent;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentController : BaseController<Rent, Rent>
+    public class RentController : BaseController<Rent, CreateRentDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         public RentController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) => _unitOfWork = unitOfWork;
