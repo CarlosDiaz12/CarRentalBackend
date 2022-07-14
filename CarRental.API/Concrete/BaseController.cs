@@ -3,9 +3,7 @@ using CarRental.API.Abstract;
 using CarRental.API.DTOs;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
-using CarRental.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
