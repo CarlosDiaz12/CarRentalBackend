@@ -50,11 +50,11 @@ namespace CarRental.API.Concrete
         public async Task<IActionResult> GetById(int Id)
         {
             var data = await _repository.GetById(Id);
-            await _unitOfWork.SaveChangesAsync();
             var response = new ResponseDto<T>(null);
             if(data == null)
             {
                 response.Success = false;
+                response.ErrorMessage = "Recurso no encontrado.";
                 return NotFound(response);
             }
 
@@ -72,9 +72,18 @@ namespace CarRental.API.Concrete
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] T _object)
         {
+            var data = await _repository.GetById(_object.Id);
+            var response = new ResponseDto<bool>(true);
+
+            if (data == null)
+            {
+                response.Success = false;
+                response.ErrorMessage = "Recurso no encontrado.";
+                return NotFound(response);
+            }
+
             _repository.Update(_object);
             await _unitOfWork.SaveChangesAsync();
-            var response = new ResponseDto<bool>(true);
             return Ok(response);
         }
     }
