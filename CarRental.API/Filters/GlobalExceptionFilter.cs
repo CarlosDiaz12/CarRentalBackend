@@ -16,12 +16,11 @@ namespace CarRental.API.Filters
             var exception = context.Exception;
 
             var statusCode = HttpStatusCode.InternalServerError;
-            var message = "Error inesperado";
+            var message = exception.Message;
 
             if (exception.GetType() == typeof(BusinessException))
             {
                 statusCode = HttpStatusCode.BadRequest;
-                message = exception.Message;
             }
             var response = new ResponseDto<bool>(false)
             {

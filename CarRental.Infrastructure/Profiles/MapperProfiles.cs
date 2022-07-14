@@ -38,6 +38,9 @@ namespace CarRental.Infrastructure.Profiles
 
             // Vehicle
             CreateMap<CreateVehicleDto, Vehicle>().ReverseMap();
+
+            // VehicleType
+            CreateMap<CreateVehicleDto, VehicleType>().ReverseMap();
         }
     }
 }
