@@ -11,7 +11,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentController : BaseController<Rent, CreateRentDto>
+    public class RentController : BaseController<Rent, CreateRentDto, Rent>
     {
         private readonly IUnitOfWork _unitOfWork;
         public RentController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) => _unitOfWork = unitOfWork;

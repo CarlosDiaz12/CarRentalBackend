@@ -9,7 +9,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : BaseController<Employee, CreateEmployeeDto>
+    public class EmployeeController : BaseController<Employee, CreateEmployeeDto, Employee>
     {
         public EmployeeController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
     }

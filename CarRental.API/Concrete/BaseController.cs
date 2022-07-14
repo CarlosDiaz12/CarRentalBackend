@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CarRental.API.Abstract;
 using CarRental.API.DTOs;
+using CarRental.Domain.DTOs;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace CarRental.API.Concrete
 {
     [Produces("application/json")]
     [ApiController]
-    public abstract class BaseController<T, TCreateDto> : ControllerBase, IBaseController<T, TCreateDto> where T: BaseEntity
+    public abstract class BaseController<T, TCreateDto, TUpdateDto> : ControllerBase, IBaseController<T, TCreateDto, TUpdateDto> where T: BaseEntity where TUpdateDto : BaseEntity // cambiarse por BaseUpdateDto
     {
         private readonly IRepository<T> _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -68,19 +69,20 @@ namespace CarRental.API.Concrete
             return Ok(new ResponseDto<IEnumerable<T>>(data));
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] T _object)
+        public async Task<IActionResult> Update([FromBody] TUpdateDto _object)
         {
-            var data = await _repository.GetById(_object.Id);
+            var exists = await _repository.Exists(_object.Id);
             var response = new ResponseDto<bool>(true);
 
-            if (data == null)
+            if (exists == false)
             {
                 response.Success = false;
                 response.ErrorMessage = "Recurso no encontrado.";
                 return NotFound(response);
             }
+            var updateModel = _mapper.Map<T>(_object);
 
-            _repository.Update(_object);
+            _repository.Update(updateModel);
             await _unitOfWork.SaveChangesAsync();
             return Ok(response);
         }

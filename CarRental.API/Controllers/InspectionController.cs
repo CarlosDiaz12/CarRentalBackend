@@ -12,7 +12,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InspectionController : BaseController<Inspection, CreateInspectionDto>
+    public class InspectionController : BaseController<Inspection, CreateInspectionDto, Inspection>
     {
         private readonly IUnitOfWork _unitOfWork;
         public InspectionController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) => _unitOfWork = unitOfWork;

@@ -62,5 +62,10 @@ namespace CarRental.Infrastructure.Repositories
 
             _dbSet.Update(entity);
         }
+
+        public async Task<bool> Exists(int Id)
+        {
+            return await _dbSet.AnyAsync(x => x.Id == Id);
+        }
     }
 }

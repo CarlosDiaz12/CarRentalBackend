@@ -9,7 +9,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FuelTypeController : BaseController<FuelType, CreateFuelTypeDto>
+    public class FuelTypeController : BaseController<FuelType, CreateFuelTypeDto, FuelType>
     {
         public FuelTypeController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
     }
