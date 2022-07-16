@@ -7,6 +7,7 @@ using CarRental.Domain.DTOs.Inspection;
 using CarRental.Domain.DTOs.Model;
 using CarRental.Domain.DTOs.Rent;
 using CarRental.Domain.DTOs.Vehicle;
+using CarRental.Domain.DTOs.VehicleType;
 using CarRental.Domain.Entities;
 
 namespace CarRental.Infrastructure.Profiles
@@ -40,7 +41,7 @@ namespace CarRental.Infrastructure.Profiles
             CreateMap<CreateVehicleDto, Vehicle>().ReverseMap();
 
             // VehicleType
-            CreateMap<CreateVehicleDto, VehicleType>().ReverseMap();
+            CreateMap<CreateVehicleTypeDto, VehicleType>().ReverseMap();
         }
     }
 }
