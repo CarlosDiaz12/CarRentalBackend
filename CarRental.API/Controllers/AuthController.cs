@@ -1,5 +1,5 @@
 ﻿using CarRental.API.DTOs;
-using CarRental.Domain.DTOs;
+using CarRental.Domain.DTOs.Auth;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;

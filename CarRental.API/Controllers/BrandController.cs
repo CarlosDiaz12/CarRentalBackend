@@ -1,4 +1,6 @@
-﻿using CarRental.API.Concrete;
+﻿using AutoMapper;
+using CarRental.API.Concrete;
+using CarRental.Domain.DTOs.Brand;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +9,8 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : BaseController<Brand>
+    public class BrandController : BaseController<Brand, CreateBrandDto, Brand>
     {
-        public BrandController(IUnitOfWork unitOfWork): base(unitOfWork) { }
+        public BrandController(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork, mapper) { }
     }
 }

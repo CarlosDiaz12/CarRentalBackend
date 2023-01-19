@@ -14,5 +14,6 @@ namespace CarRental.Domain.Interfaces
         Task Insert(T entity);
         void Update(T entity);
         Task Delete(int Id);
+        Task<bool> Exists(int Id);
     }
 }

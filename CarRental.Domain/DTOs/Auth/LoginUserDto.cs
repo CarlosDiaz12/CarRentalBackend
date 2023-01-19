@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarRental.Domain.DTOs
+namespace CarRental.Domain.DTOs.Auth
 {
     public class LoginUserDto
     {

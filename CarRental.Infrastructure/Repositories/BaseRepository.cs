@@ -1,4 +1,5 @@
 ﻿using CarRental.Domain.Entities;
+using CarRental.Domain.Exceptions;
 using CarRental.Domain.Interfaces;
 using CarRental.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,11 @@ namespace CarRental.Infrastructure.Repositories
                 _dbContext.Attach(entity);
 
             _dbSet.Update(entity);
+        }
+
+        public async Task<bool> Exists(int Id)
+        {
+            return await _dbSet.AnyAsync(x => x.Id == Id);
         }
     }
 }

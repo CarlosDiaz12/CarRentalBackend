@@ -27,12 +27,11 @@ namespace CarRental.Infrastructure.Repositories
         public async Task<bool> IsAvailableForRent(int vehicleId, DateTime rentDate, DateTime returnDate)
         {
             // verificar si no hay rentas para ese vehiculo, en ese rango de fechas
-            var query = await _dbContext.Rents
-                                        .Where(x => x.VehicleId == vehicleId && x.Returned == false 
-                                                && (rentDate >= x.RentDate.Date  && rentDate <= x.ReturnDate
-                                                || returnDate >= x.RentDate && returnDate <= x.ReturnDate))
-                                        .CountAsync();
-            return query == 0;
+            var takenSlot = await _dbContext.Rents
+                                        .AnyAsync(x => x.VehicleId == vehicleId && x.Returned == false
+                                                && (rentDate >= x.RentDate.Date && rentDate <= x.ReturnDate
+                                                || returnDate >= x.RentDate && returnDate <= x.ReturnDate));                                  
+            return !takenSlot;
         }
     }
 }
