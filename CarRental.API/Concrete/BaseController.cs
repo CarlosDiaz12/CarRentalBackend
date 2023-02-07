@@ -3,6 +3,7 @@ using CarRental.API.DTOs;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
 using CarRental.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace CarRental.API.Concrete
 {
     [Produces("application/json")]
     [ApiController]
+    [Authorize]
     public abstract class BaseController<T> : ControllerBase, IBaseController<T> where T: BaseEntity
     {
         private readonly IRepository<T> _repository;
@@ -32,9 +34,9 @@ namespace CarRental.API.Concrete
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _repository.Delete(Id);
+            await _repository.Delete(id);
             var result = await _unitOfWork.SaveChangesAsync() > 0;
             var response = new ResponseDto<bool>(result, result);
             return Ok(response);

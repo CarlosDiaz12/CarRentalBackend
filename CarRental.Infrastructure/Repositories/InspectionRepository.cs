@@ -18,7 +18,7 @@ namespace CarRental.Infrastructure.Repositories
 
         }
 
-        public async Task<bool> VehicleIsInspected(int idVehicle, int idClient, DateTime inspectionDate, InspectionType type)
+        public async Task<bool> VehicleIsInspected(int idVehicle, int idClient, DateTime inspectionDate)
         {
 
             var exists = await _dbContext.Inspections

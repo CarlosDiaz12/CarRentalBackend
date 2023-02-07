@@ -9,6 +9,6 @@ namespace CarRental.Domain.Interfaces
 {
     public interface IInspectionRepository: IRepository<Inspection>
     {
-        Task<bool> VehicleIsInspected(int idVehicle, int idClient, DateTime inspectionDate, InspectionType type);
+        Task<bool> VehicleIsInspected(int idVehicle, int idClient, DateTime inspectionDate);
     }
 }

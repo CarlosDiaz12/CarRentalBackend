@@ -10,3 +10,4 @@ namespace CarRental.Domain.Enums
         LEGAL
     }
 }
+

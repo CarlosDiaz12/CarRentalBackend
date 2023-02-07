@@ -12,6 +12,12 @@ namespace CarRental.API.DTOs
             Data = data;
             Success = success;
         }
+
+        public ResponseDto(bool success, string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+            Success = success;
+        }
         public string ErrorMessage { get; set; }
         public bool Success { get; set; } = true;
         public T Data { get; set; }

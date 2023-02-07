@@ -18,7 +18,7 @@ namespace CarRental.API.Controllers
         [HttpGet("inspected")]
         public async Task<IActionResult> CheckVehicleIsInspected([FromQuery] CheckVehicleAvaiabilityDto data)
         {
-            var response = await _unitOfWork.InspectionRepository.VehicleIsInspected(data.vehicleId, data.clientId, data.inspectionDate, data.type);
+            var response = await _unitOfWork.InspectionRepository.VehicleIsInspected(data.vehicleId, data.clientId, data.inspectionDate);
             return Ok(new ResponseDto<bool>(response));
         }
     }
